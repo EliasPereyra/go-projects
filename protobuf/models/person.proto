@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+// protobuf is the name of the project and then the folder
+option go_package = "protobuf/models";
+
+enum PhoneType {
+  MOBILE = 0;
+  WORK = 1;
+  HOME = 2;
+}
+
+message PhoneNumber {
+  string number = 1;
+  PhoneType type = 2;
+}
+
+message Person {
+  string name = 1;
+  string email = 2;
+  int32 id = 3;
+  repeated PhoneNumber phones = 4;
+}
