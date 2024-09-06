@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api-testing/controllers"
 	"api-testing/models"
 	"log"
 	"net/http"
@@ -17,6 +18,7 @@ func main() {
 	models.DBMigrate()
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("/posts", controllers.GetAllPosts)
 	mux.HandleFunc("/checkhealth", Checkhealth)
 
 	log.Printf("The server is running at %s", PORT)
