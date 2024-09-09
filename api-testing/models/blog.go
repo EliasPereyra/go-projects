@@ -16,6 +16,6 @@ func GetAll() *[]Blog {
 
 func GetOnePost(id uint64) *Blog {
 	var post Blog
-	DB.Where("id = ?").First(&post)
+	DB.Where("id = ?", id).First(&post)
 	return &post
 }
