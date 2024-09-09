@@ -19,6 +19,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/posts", controllers.GetAllPosts)
+	mux.HandleFunc("/posts/", controllers.GetOnePost)
 	mux.HandleFunc("/checkhealth", Checkhealth)
 
 	log.Printf("The server is running at %s", PORT)
