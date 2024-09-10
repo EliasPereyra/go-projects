@@ -69,4 +69,15 @@ func TestGetOnePost(t *testing.T) {
 		assert.Equal(t, postTest.Title, postCreated.Title, "The post should have a title")
 		assert.Equal(t, postTest.Body, postCreated.Body, "The post should have a body content")
 	})
+
+	t.Run("Invalid post ID", func(t *testing.T) {
+		req := httptest.NewRequest(http.MethodGet, "/posts/invalid", nil)
+		resRec := httptest.NewRecorder()
+
+		controllers.GetOnePost(resRec, req)
+		res := resRec.Result()
+		defer res.Body.Close()
+
+		assert.Equal(t, http.StatusBadRequest, res.StatusCode)
+	})
 }
