@@ -80,4 +80,15 @@ func TestGetOnePost(t *testing.T) {
 
 		assert.Equal(t, http.StatusBadRequest, res.StatusCode)
 	})
+
+	t.Run("Non-existing post ID", func(t *testing.T) {
+		req := httptest.NewRequest(http.MethodGet, "/posts/1111", nil)
+		resRec := httptest.NewRecorder()
+
+		controllers.GetOnePost(resRec, req)
+		res := resRec.Result()
+		defer res.Body.Close()
+
+		assert.Equal(t, http.StatusNotFound, res.StatusCode)
+	})
 }
