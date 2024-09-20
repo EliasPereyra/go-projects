@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+// this will the proto compiler where the output will be
+option go_package = "go_grpc/proto";
+
+// Here we define like a namespace, so that all the code
+// will be under this particular name
+package personService;
+
+service PersonService {
+    rpc Sayhello (HelloReq) returns (HelloResponse);
+}
+
+message HelloReq {
+    string message = 1;
+}
+
+message HelloResponse {
+    string response = 1;
+}
+
+message SuccessResponse {
+    string response = 1;
+}
