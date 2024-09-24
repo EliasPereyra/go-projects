@@ -29,11 +29,45 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
 	defer cancel()
 
-	fmt.Println("hello")
-	generateReq := &pb.HelloReq{Message: "Wow"}
-	generateRes, err := client.Sayhello(ctx, generateReq)
+	generateCreateReq := &pb.CreatePersonRequest{Name: "elias", Email: "elias@mail.com", PhoneNumber: "123456"}
+	generateCreateRes, err := client.Create(ctx, generateCreateReq)
 	if err != nil {
 		log.Fatalf("Error when generating the req: %v", err)
 	}
-	fmt.Print("Greeting: ", generateRes)
+	fmt.Println("--Person created: ", generateCreateRes)
+
+	fmt.Println("--Getting a user by ID")
+	readReq := &pb.SinglePersonRequest{Id: 1}
+	readRes, err := client.Read(ctx, readReq)
+	if err != nil {
+		log.Fatalf("Error when getting a user: %v", err)
+	}
+	fmt.Println("The person requested: ", readRes)
+
+	fmt.Println("--Update a user:")
+	updatedReq := &pb.UpdatePersonRequest{
+		Id:          1,
+		Name:        "eliseo",
+		Email:       "eliseo@mail.com",
+		PhoneNumber: "123151515",
+	}
+	updateRes, err := client.Update(ctx, updatedReq)
+	if err != nil {
+		log.Fatalf("Error when updating a user: %v", err)
+	}
+	newUserReq := &pb.SinglePersonRequest{Id: 1}
+	newUserRes, err := client.Read(ctx, newUserReq)
+	if err != nil {
+		log.Fatalf("Error when getting a user: %v", err)
+	}
+	fmt.Println(updateRes)
+	fmt.Println("User updated: ", newUserRes)
+
+	fmt.Println("--Delete a user by ID:")
+	delUserReq := pb.SinglePersonRequest{Id: 1}
+	delUserRes, err := client.Delete(ctx, &delUserReq)
+	if err != nil {
+		log.Fatalf("Error when trying to delete a user: %v", err)
+	}
+	fmt.Println(delUserRes)
 }
