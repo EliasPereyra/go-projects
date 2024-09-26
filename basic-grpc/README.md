@@ -15,3 +15,6 @@ It provides default methods for the fields like getting a specified field, or mo
 
 ## gRPC vs REST
 // TODO
+
+>[!NOTE]
+>You'll need the go plugin for the proto buffer: `go install google.golang.org/protobuf/cmd/protoc-gen-go@latest` and for generating code for calling grpc calls in proto buf definitions: `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest`
