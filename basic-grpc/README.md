@@ -14,7 +14,9 @@ You define a `message` for an object structure and then process it through `prot
 It provides default methods for the fields like getting a specified field, or modify it, as well as serializing/parsing.
 
 ## gRPC vs REST
-// TODO
+- Protocol: **gRPC** uses HTTP/2 which provides better performance and less latency, while REST uses HTTP/1.1
+- Data format: **gRPC** uses Protocol Buffers, while REST uses the traditional JSON or XML data formats.
+- API design: **gRPC** follows the [RPC paradigm](https://en.wikipedia.org/wiki/Remote_procedure_call), while REST adheres to the [Representational State Transfer model](https://en.wikipedia.org/wiki/REST).
 
 >[!NOTE]
 >You'll need the go plugin for the proto buffer: `go install google.golang.org/protobuf/cmd/protoc-gen-go@latest` and for generating code for calling grpc calls in proto buf definitions: `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest`
